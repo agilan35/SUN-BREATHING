@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUN BREATHING | Fake Certificate Detection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <!-- Replace "your-logo.png" with the actual name of your image file -->
+            <img src="your-logo.png" alt="CertVerify Logo">
+            <span>CertVerify</span>
+        </div>
+
+        <button class="nav-btn">Institution Login</button>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Validate Credentials Instantly</h1>
+            <p>Upload academic or professional certificates. Our AI-driven verification engine cross-references the
+                institution's database to detect fraud in seconds.</p>
+
+            <div class="upload-card">
+                <div class="upload-area" id="drop-zone">
+                    <div class="upload-icon">📄</div>
+                    <h3>Drag & Drop your certificate here</h3>
+                    <p>Supports PDF, PNG, or JPG (Max 5MB)</p>
+                </div>
+                <button class="primary-btn">Scan Document</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-box">
+                <h4>1. AI Data Extraction</h4>
+                <p>We use advanced OCR to instantly read text, names, and certificate IDs from your uploaded document.
+                </p>
+            </div>
+            <div class="feature-box">
+                <h4>2. Anomaly Detection</h4>
+                <p>Our machine learning models scan the file for digital tampering, pixel inconsistencies, and layout
+                    manipulation.</p>
+            </div>
+            <div class="feature-box">
+                <h4>3. Ground-Truth Verification</h4>
+                <p>We securely query the issuing institution's database via API to confirm the candidate's exact
+                    completion records.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple drag-and-drop visual feedback
+        const dropZone = document.getElementById('drop-zone');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            // File handling logic would go here
+            alert('File dropped! Ready to link to your backend API.');
+        });
+    </script>
+</body>
+
+</html>
