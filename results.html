@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUN BREATHING | Verification Results</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #3A0005 0%, #B90015 60%, #FF98A8 100%);
+            --text-dark: #F9FAFB;
+            --text-light: #FFFFFF;
+            --bg-dark: #0D0D0D;
+            --card-bg: rgba(25, 25, 25, 0.95);
+            --real-green: #22C55E;
+            --fake-red: #EF4444;
+            --suspicious-yellow: #FBBF24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        header {
+            background: rgba(13, 13, 13, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3A0005;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-btn {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 152, 168, 0.4);
+        }
+
+        /* Main Results Container */
+        main {
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .results-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .result-verdict {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .result-verdict.real {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--real-green);
+            border: 2px solid var(--real-green);
+        }
+
+        .result-verdict.fake {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--fake-red);
+            border: 2px solid var(--fake-red);
+        }
+
+        .result-verdict.suspicious {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--suspicious-yellow);
+            border: 2px solid var(--suspicious-yellow);
+        }
+
+        /* Two-Column Layout */
+        .results-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Left Side - Detailed Analysis */
+        .analysis-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid #B90015;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #FF98A8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 4px;
+            height: 24px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Extracted Text Section */
+        .extracted-text {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            border-left: 3px solid #FF98A8;
+        }
+
+        .extracted-text h4 {
+            color: #FF98A8;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .extracted-text p {
+            color: #D1D5DB;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Verification Results */
+        .verification-results {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #FF98A8;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 152, 168, 0.2);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #D1D5DB;
+            font-weight: 500;
+        }
+
+        .result-value {
+            color: #FF98A8;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        .match-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .match-badge.matched {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--real-green);
+        }
+
+        .match-badge.mismatched {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--fake-red);
+        }
+
+        /* Extracted Data */
+        .extracted-data {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid #FF98A8;
+        }
+
+        .data-field {
+            margin-bottom: 1rem;
+        }
+
+        .data-field label {
+            color: #9CA3AF;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .data-field value {
+            color: #FF98A8;
+            font-weight: 600;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        /* Right Side - Image Preview & Scores */
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .image-preview {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #B90015;
+            flex: 1;
+        }
+
+        .image-preview h3 {
+            color: #FF98A8;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .image-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            border: 2px solid rgba(255, 152, 168, 0.3);
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        /* Score Bars */
+        .score-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #B90015;
+        }
+
+        .score-section h3 {
+            color: #FF98A8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .score-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .score-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .score-label-text {
+            color: #D1D5DB;
+        }
+
+        .score-value {
+            color: #FF98A8;
+            font-family: 'Courier New', monospace;
+        }
+
+        .score-track {
+            width: 100%;
+            height: 24px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 152, 168, 0.2);
+        }
+
+        .score-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: width 0.3s ease;
+        }
+
+        .score-fill.real {
+            background: linear-gradient(90deg, var(--real-green), #16A34A);
+            color: white;
+        }
+
+        .score-fill.fake {
+            background: linear-gradient(90deg, var(--fake-red), #DC2626);
+            color: white;
+        }
+
+        .score-fill.suspicious {
+            background: linear-gradient(90deg, var(--suspicious-yellow), #F59E0B);
+            color: #000;
+        }
+
+        /* Flags Section */
+        .flags-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border-left: 3px solid #FF98A8;
+        }
+
+        .flags-section h4 {
+            color: #FF98A8;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .flag-tag {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--fake-red);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+
+        .flag-tag.warning {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--suspicious-yellow);
+            border-color: rgba(251, 191, 36, 0.5);
+        }
+
+        .flag-tag.info {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60A5FA;
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 152, 168, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 152, 168, 0.1);
+            color: #FF98A8;
+            border: 2px solid #FF98A8;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 152, 168, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 152, 168, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #B90015;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF98A8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .results-container {
+                grid-template-columns: 1fr;
+            }
+
+            .results-header h1 {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem 3%;
+            }
+
+            .analysis-section,
+            .image-preview,
+            .score-section {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">🔥 SUN BREATHING</div>
+        <button class="nav-btn" onclick="downloadReport()">📥 Download Report</button>
+    </header>
+
+    <main>
+        <!-- Results Header -->
+        <div class="results-header">
+            <h1>Verification Results</h1>
+            <p id="timestamp" style="color: #9CA3AF; font-size: 0.9rem;"></p>
+            <div id="verdict-display" class="result-verdict real">
+                ANALYZING...
+            </div>
+        </div>
+
+        <!-- Two-Column Results Layout -->
+        <div class="results-container">
+            <!-- LEFT SIDE: Detailed Analysis -->
+            <div class="analysis-section">
+                <h2 class="section-title">Document Analysis</h2>
+
+                <!-- Extracted Text -->
+                <div class="extracted-text">
+                    <h4>📜 Extracted Text</h4>
+                    <p id="extracted-text-display">[Loading OCR text...]</p>
+                </div>
+
+                <!-- Verification Results -->
+                <div class="verification-results">
+                    <h4>🔍 Verification Results</h4>
+                    <div class="result-item">
+                        <span class="result-label">Database Match Status:</span>
+                        <span class="result-value" id="match-status">[Pending]</span>
+                        <span class="match-badge matched" id="match-badge" style="display:none;">MATCHED</span>
+                        <span class="match-badge mismatched" id="mismatch-badge" style="display:none;">NOT MATCHED</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Text Match Score:</span>
+                        <span class="result-value" id="text-match-score">[Pending]</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Visual Quality Score:</span>
+                        <span class="result-value" id="visual-score">[Pending]</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Overall Confidence:</span>
+                        <span class="result-value" id="overall-confidence">[Pending]</span>
+                    </div>
+                </div>
+
+                <!-- Extracted Data -->
+                <div class="extracted-data">
+                    <h4>📋 Extracted Data</h4>
+                    <div class="data-field">
+                        <label>Certificate/Document ID</label>
+                        <value id="data-id">[Not extracted]</value>
+                    </div>
+                    <div class="data-field">
+                        <label>Recipient/Holder Name</label>
+                        <value id="data-name">[Not extracted]</value>
+                    </div>
+                    <div class="data-field">
+                        <label>Institution/Authority</label>
+                        <value id="data-institution">[Not extracted]</value>
+                    </div>
+                    <div class="data-field">
+                        <label>Course/Document Type</label>
+                        <value id="data-course">[Not extracted]</value>
+                    </div>
+                    <div class="data-field">
+                        <label>Dates Detected</label>
+                        <value id="data-dates">[Not extracted]</value>
+                    </div>
+                </div>
+
+                <!-- Flags -->
+                <div class="flags-section" id="flags-section" style="display:none;">
+                    <h4>⚠️ Detection Flags</h4>
+                    <div id="flags-container"></div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: Image & Scores -->
+            <div class="preview-section">
+                <!-- Image Preview -->
+                <div class="image-preview">
+                    <h3>📸 Document Preview</h3>
+                    <div class="image-container">
+                        <img id="preview-image" src="" alt="Uploaded Document">
+                    </div>
+                </div>
+
+                <!-- Score Bars -->
+                <div class="score-section">
+                    <h3>📊 Probability Scores</h3>
+
+                    <div class="score-bar">
+                        <div class="score-label">
+                            <span class="score-label-text">✓ REAL</span>
+                            <span class="score-value" id="real-score-text">0%</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill real" id="real-score-bar" style="width: 0%;">
+                                <span id="real-score-display"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="score-bar">
+                        <div class="score-label">
+                            <span class="score-label-text">⚠️ SUSPICIOUS</span>
+                            <span class="score-value" id="suspicious-score-text">0%</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill suspicious" id="suspicious-score-bar" style="width: 0%;">
+                                <span id="suspicious-score-display"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="score-bar">
+                        <div class="score-label">
+                            <span class="score-label-text">✗ FAKE</span>
+                            <span class="score-value" id="fake-score-text">0%</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill fake" id="fake-score-bar" style="width: 0%;">
+                                <span id="fake-score-display"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="verifyCertificate()">🔄 Verify Another</button>
+            <button class="btn btn-secondary" onclick="goHome()">🏠 Back to Home</button>
+        </div>
+    </main>
+
+    <script>
+        // Initialize timestamp
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+
+        // Load results from sessionStorage
+        function loadResults() {
+            const results = JSON.parse(sessionStorage.getItem('verificationResults') || '{}');
+            
+            if (!results.image_preview) {
+                document.getElementById('verdict-display').textContent = 'NO RESULTS FOUND';
+                return;
+            }
+
+            // Display image
+            document.getElementById('preview-image').src = results.image_preview;
+
+            // Display extracted text
+            document.getElementById('extracted-text-display').textContent = 
+                results.extracted_text || '[No text extracted]';
+
+            // Display verdict
+            const verdict = results.overall_verdict;
+            const verdictElement = document.getElementById('verdict-display');
+            verdictElement.textContent = verdict;
+            verdictElement.className = 'result-verdict ' + verdict.toLowerCase();
+
+            // Display verification results
+            document.getElementById('match-status').textContent = 
+                results.is_match ? 'MATCHED' : 'NOT MATCHED';
+            
+            if (results.is_match) {
+                document.getElementById('match-badge').style.display = 'inline-block';
+                document.getElementById('mismatch-badge').style.display = 'none';
+            } else {
+                document.getElementById('match-badge').style.display = 'none';
+                document.getElementById('mismatch-badge').style.display = 'inline-block';
+            }
+
+            document.getElementById('text-match-score').textContent = 
+                (results.text_match_score || 0).toFixed(1) + '%';
+            document.getElementById('visual-score').textContent = 
+                (results.visual_score || 0).toFixed(1) + '%';
+            
+            const overall = ((results.text_match_score || 0) + (results.visual_score || 0)) / 2;
+            document.getElementById('overall-confidence').textContent = overall.toFixed(1) + '%';
+
+            // Display extracted data
+            document.getElementById('data-id').textContent = 
+                results.extracted_ids?.certificate_ids?.[0] || 
+                results.extracted_ids?.document_ids?.[0] || 
+                '[Not found]';
+            document.getElementById('data-name').textContent = 
+                results.extracted_ids?.names?.[0] || '[Not found]';
+            document.getElementById('data-institution').textContent = 
+                results.extracted_ids?.institutions?.[0] || '[Not found]';
+            document.getElementById('data-course').textContent = 
+                results.extracted_ids?.courses?.[0] || '[Not found]';
+            document.getElementById('data-dates').textContent = 
+                results.extracted_ids?.dates?.join(', ') || '[Not found]';
+
+            // Display flags
+            if (results.flags && results.flags.length > 0) {
+                document.getElementById('flags-section').style.display = 'block';
+                const flagsContainer = document.getElementById('flags-container');
+                flagsContainer.innerHTML = results.flags
+                    .map(flag => `<span class="flag-tag warning">${flag}</span>`)
+                    .join('');
+            }
+
+            // Display score bars
+            displayScoreBars(results);
+        }
+
+        function displayScoreBars(results) {
+            const visualScore = results.visual_score || 0;
+            const textScore = results.text_match_score || 0;
+            const avgScore = (visualScore + textScore) / 2;
+
+            let realScore, suspiciousScore, fakeScore;
+
+            if (results.overall_verdict === 'REAL') {
+                realScore = avgScore;
+                suspiciousScore = (100 - avgScore) * 0.3;
+                fakeScore = (100 - avgScore) * 0.7;
+            } else if (results.overall_verdict === 'SUSPICIOUS') {
+                realScore = avgScore * 0.4;
+                suspiciousScore = 50;
+                fakeScore = avgScore * 0.6;
+            } else { // FAKE
+                realScore = (100 - avgScore) * 0.2;
+                suspiciousScore = (100 - avgScore) * 0.3;
+                fakeScore = avgScore;
+            }
+
+            updateScoreBar('real', realScore);
+            updateScoreBar('suspicious', suspiciousScore);
+            updateScoreBar('fake', fakeScore);
+        }
+
+        function updateScoreBar(type, score) {
+            const barElement = document.getElementById(type + '-score-bar');
+            const textElement = document.getElementById(type + '-score-text');
+            const displayElement = document.getElementById(type + '-score-display');
+
+            barElement.style.width = score + '%';
+            textElement.textContent = Math.round(score) + '%';
+            displayElement.textContent = Math.round(score) + '%';
+        }
+
+        function downloadReport() {
+            alert('Report download functionality will be implemented.\nResults have been saved to the verification logs database.');
+        }
+
+        function verifyCertificate() {
+            window.location.href = 'index.html';
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Load results when page loads
+        window.addEventListener('load', loadResults);
+    </script>
+</body>
+
+</html>
