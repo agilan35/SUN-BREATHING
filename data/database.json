@@ -1,0 +1,271 @@
+{
+  "users": [
+    {
+      "id": "user_001",
+      "name": "Dr. Alexander Wright",
+      "email": "demo@sunbreathing.ai",
+      "passwordHash": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+      "role": "Institution Admin",
+      "organization": "Global Academic Verification Board",
+      "created_at": "2025-08-01T09:00:00.000Z"
+    }
+  ],
+  "feature_cards": [
+    {
+      "id": "feat_1",
+      "icon_type": "brain",
+      "icon_color": "#EF4444",
+      "title": "AI Powered",
+      "description": "Advanced AI models analyze patterns and detect manipulations.",
+      "display_order": 1
+    },
+    {
+      "id": "feat_2",
+      "icon_type": "shield",
+      "icon_color": "#F97316",
+      "title": "Secure & Private",
+      "description": "Your files are encrypted and handled securely. We value your privacy.",
+      "display_order": 2
+    },
+    {
+      "id": "feat_3",
+      "icon_type": "bolt",
+      "icon_color": "#EF4444",
+      "title": "Fast Results",
+      "description": "Get results in seconds with high accuracy and reliability.",
+      "display_order": 3
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert_5035b95d",
+      "user_id": "user_001",
+      "original_filename": "test_student_diploma_2025.jpg",
+      "stored_filename": "cert_1788248386113_9239e85c.jpg",
+      "file_size": 31,
+      "content_type": "image/jpeg",
+      "created_at": "2026-09-01T07:39:46.171Z"
+    },
+    {
+      "id": "cert_001",
+      "user_id": "user_001",
+      "original_filename": "certificate_001.jpg",
+      "stored_filename": "sample_cert_001.jpg",
+      "file_size": 142850,
+      "content_type": "image/jpeg",
+      "created_at": "2025-08-28T10:30:00.000Z"
+    },
+    {
+      "id": "cert_002",
+      "user_id": "user_001",
+      "original_filename": "certificate_002.jpg",
+      "stored_filename": "sample_cert_002.jpg",
+      "file_size": 198420,
+      "content_type": "image/jpeg",
+      "created_at": "2025-08-27T16:15:00.000Z"
+    },
+    {
+      "id": "cert_003",
+      "user_id": "user_001",
+      "original_filename": "certificate_003.jpg",
+      "stored_filename": "sample_cert_003.jpg",
+      "file_size": 165310,
+      "content_type": "image/jpeg",
+      "created_at": "2025-08-26T11:20:00.000Z"
+    }
+  ],
+  "scan_history": [
+    {
+      "id": "scan_ee198ebd",
+      "certificate_id": "cert_5035b95d",
+      "user_id": "user_001",
+      "file_name": "test_student_diploma_2025.jpg",
+      "date_time_display": "01 Sept 2026, 01:09 PM",
+      "analysis_status": "Completed",
+      "final_verdict": "Real Certificate",
+      "confidence_score": 98,
+      "completed_at": "2026-09-01T07:39:46.171Z",
+      "detailed_ai_results": {
+        "verdict": "Real Certificate",
+        "is_authentic": true,
+        "confidence": 98,
+        "overall_risk": "Low",
+        "sha256_hash": "6787852a717350a54db4a70c3133484ddabdaf654da1b8684e2e00f639ee2c6e",
+        "scores": {
+          "seal_integrity": 99,
+          "signature_authenticity": 97,
+          "font_consistency": 98.6,
+          "metadata_integrity": 100,
+          "error_level_analysis": 97
+        },
+        "tamper_zones": [],
+        "metadata": {
+          "institution": "Stanford University / Academic Registrar",
+          "recipient_name": "test student diploma 2025",
+          "degree": "Bachelor of Science in Computer Science & Information Systems",
+          "issue_date": "June 14, 2024",
+          "serial_number": "SU-CS-2024-13034",
+          "digital_signature_valid": true,
+          "software_used": "Official Registrar CertPublisher v4.2"
+        },
+        "findings": [
+          "Cryptographic integrity check passed with zero digital tampering artifacts.",
+          "Seal micro-geometry and circular concentric embossing align with official institutional templates.",
+          "Signature velocity vectors and stroke pressure match verified registrar profile.",
+          "Error Level Analysis (ELA) confirms uniform, single-generation quantization across all sectors."
+        ]
+      }
+    },
+    {
+      "id": "scan_001",
+      "certificate_id": "cert_001",
+      "user_id": "user_001",
+      "file_name": "certificate_001.jpg",
+      "date_time_display": "28 Aug 2025, 10:30 AM",
+      "analysis_status": "Completed",
+      "final_verdict": "Real Certificate",
+      "confidence_score": 98.4,
+      "completed_at": "2025-08-28T10:30:15.000Z",
+      "detailed_ai_results": {
+        "verdict": "Real Certificate",
+        "is_authentic": true,
+        "confidence": 98.4,
+        "overall_risk": "Low",
+        "scores": {
+          "seal_integrity": 99.2,
+          "signature_authenticity": 97.8,
+          "font_consistency": 98.5,
+          "metadata_integrity": 100,
+          "error_level_analysis": 96.7
+        },
+        "tamper_zones": [],
+        "metadata": {
+          "institution": "Stanford University",
+          "recipient_name": "Emily Rose Davis",
+          "degree": "Bachelor of Science in Computer Science",
+          "issue_date": "June 14, 2024",
+          "serial_number": "SU-CS-2024-88492",
+          "digital_signature_valid": true,
+          "software_used": "Official Registrar CertPublisher v4.2"
+        },
+        "findings": [
+          "Cryptographic watermark matches official institutional key registry.",
+          "Seal micro-embossing geometry shows zero pixel-level manipulation.",
+          "Signature stroke pressure velocity is consistent with natural pen stroke.",
+          "Error Level Analysis (ELA) confirms uniform compression across all document quadrants."
+        ]
+      }
+    },
+    {
+      "id": "scan_002",
+      "certificate_id": "cert_002",
+      "user_id": "user_001",
+      "file_name": "certificate_002.jpg",
+      "date_time_display": "27 Aug 2025, 04:15 PM",
+      "analysis_status": "Completed",
+      "final_verdict": "Fake Certificate",
+      "confidence_score": 94.6,
+      "completed_at": "2025-08-27T16:15:22.000Z",
+      "detailed_ai_results": {
+        "verdict": "Fake Certificate",
+        "is_authentic": false,
+        "confidence": 94.6,
+        "overall_risk": "Critical",
+        "scores": {
+          "seal_integrity": 34.2,
+          "signature_authenticity": 28.5,
+          "font_consistency": 41,
+          "metadata_integrity": 15,
+          "error_level_analysis": 22.8
+        },
+        "tamper_zones": [
+          {
+            "id": "tz_1",
+            "x": 28,
+            "y": 42,
+            "width": 44,
+            "height": 12,
+            "label": "Recipient Name Overlay",
+            "detail": "Pixel noise level variance detected (89% discrepancy). Font anti-aliasing does not match original template.",
+            "severity": "high"
+          },
+          {
+            "id": "tz_2",
+            "x": 68,
+            "y": 72,
+            "width": 22,
+            "height": 20,
+            "label": "Digital Seal Inconsistency",
+            "detail": "Forged seal contour: Compression boundary artifacts indicate stamp was cropped and pasted from external document.",
+            "severity": "critical"
+          },
+          {
+            "id": "tz_3",
+            "x": 18,
+            "y": 74,
+            "width": 32,
+            "height": 14,
+            "label": "Signature Stroke Discontinuity",
+            "detail": "Digital copy-paste halo detected with mismatched alpha threshold.",
+            "severity": "high"
+          }
+        ],
+        "metadata": {
+          "institution": "Massachusetts Institute of Technology (MIT)",
+          "recipient_name": "Johnathan C. Doe [FORGED]",
+          "degree": "Master of Artificial Intelligence",
+          "issue_date": "May 20, 2024",
+          "serial_number": "MIT-ENG-2024-99120 [INVALID]",
+          "digital_signature_valid": false,
+          "software_used": "Adobe Photoshop 2024 (Windows)"
+        },
+        "findings": [
+          "CRITICAL: Adobe Photoshop edit history detected in EXIF chunk markers.",
+          "CRITICAL: Forged candidate name with mismatched pixel grid and Gaussian blur smoothing.",
+          "ALERT: Official institutional seal lacks authentic golden metallic spectral resonance.",
+          "ALERT: Serial number format does not match the 2024 Registrar schema."
+        ]
+      }
+    },
+    {
+      "id": "scan_003",
+      "certificate_id": "cert_003",
+      "user_id": "user_001",
+      "file_name": "certificate_003.jpg",
+      "date_time_display": "26 Aug 2025, 11:20 AM",
+      "analysis_status": "Completed",
+      "final_verdict": "Real Certificate",
+      "confidence_score": 97.1,
+      "completed_at": "2025-08-26T11:20:10.000Z",
+      "detailed_ai_results": {
+        "verdict": "Real Certificate",
+        "is_authentic": true,
+        "confidence": 97.1,
+        "overall_risk": "Low",
+        "scores": {
+          "seal_integrity": 98,
+          "signature_authenticity": 96.5,
+          "font_consistency": 99.1,
+          "metadata_integrity": 95,
+          "error_level_analysis": 97.4
+        },
+        "tamper_zones": [],
+        "metadata": {
+          "institution": "Harvard Medical School",
+          "recipient_name": "Dr. Sarah Lin",
+          "degree": "Doctor of Medicine (M.D.)",
+          "issue_date": "May 28, 2023",
+          "serial_number": "HMS-MD-2023-44120",
+          "digital_signature_valid": true,
+          "software_used": "TrueSeal Verified Registrar Suite"
+        },
+        "findings": [
+          "Full cryptographic signature verification passed against HMS Public Ledger.",
+          "Uniform Error Level Analysis across text, border, and embossed insignia.",
+          "Authentic high-resolution rasterization of medical board crest.",
+          "Metadata timestamps correlate with institutional registry timestamp."
+        ]
+      }
+    }
+  ]
+}
