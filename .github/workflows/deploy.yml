@@ -1,0 +1,46 @@
+name: Deploy Full-Stack App & Verify
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Backend Server & Verification Tests
+        run: |
+          node server/server.js &
+          sleep 3
+          node test_api.js
+
+      - name: Deploy to GitHub Pages (Static Frontend Preview)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './public'
+
+  deploy-pages:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
