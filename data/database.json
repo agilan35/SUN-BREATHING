@@ -38,6 +38,15 @@
   ],
   "certificates": [
     {
+      "id": "cert_9a153095",
+      "user_id": "user_001",
+      "original_filename": "test_student_diploma_2025.jpg",
+      "stored_filename": "cert_1788251125507_6eef0c09.jpg",
+      "file_size": 31,
+      "content_type": "image/jpeg",
+      "created_at": "2026-09-01T08:25:25.669Z"
+    },
+    {
       "id": "cert_5035b95d",
       "user_id": "user_001",
       "original_filename": "test_student_diploma_2025.jpg",
@@ -75,6 +84,47 @@
     }
   ],
   "scan_history": [
+    {
+      "id": "scan_325eddaf",
+      "certificate_id": "cert_9a153095",
+      "user_id": "user_001",
+      "file_name": "test_student_diploma_2025.jpg",
+      "date_time_display": "01 Sept 2026, 01:55 PM",
+      "analysis_status": "Completed",
+      "final_verdict": "Real Certificate",
+      "confidence_score": 98,
+      "completed_at": "2026-09-01T08:25:25.669Z",
+      "detailed_ai_results": {
+        "verdict": "Real Certificate",
+        "is_authentic": true,
+        "confidence": 98,
+        "overall_risk": "Low",
+        "sha256_hash": "6787852a717350a54db4a70c3133484ddabdaf654da1b8684e2e00f639ee2c6e",
+        "scores": {
+          "seal_integrity": 99,
+          "signature_authenticity": 97,
+          "font_consistency": 98.6,
+          "metadata_integrity": 100,
+          "error_level_analysis": 97
+        },
+        "tamper_zones": [],
+        "metadata": {
+          "institution": "Stanford University / Academic Registrar",
+          "recipient_name": "test student diploma 2025",
+          "degree": "Bachelor of Science in Computer Science & Information Systems",
+          "issue_date": "June 14, 2024",
+          "serial_number": "SU-CS-2024-13034",
+          "digital_signature_valid": true,
+          "software_used": "Official Registrar CertPublisher v4.2"
+        },
+        "findings": [
+          "Cryptographic integrity check passed with zero digital tampering artifacts.",
+          "Seal micro-geometry and circular concentric embossing align with official institutional templates.",
+          "Signature velocity vectors and stroke pressure match verified registrar profile.",
+          "Error Level Analysis (ELA) confirms uniform, single-generation quantization across all sectors."
+        ]
+      }
+    },
     {
       "id": "scan_ee198ebd",
       "certificate_id": "cert_5035b95d",
